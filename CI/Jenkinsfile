@@ -16,7 +16,7 @@ pipeline {
                 }
               }
               steps {
-                sh 'chmod +x gradlew'
+                sh 'chmod +x ./Backend/gradlew'
                 sh './Backend/gradlew bootJar'
               }
             }
