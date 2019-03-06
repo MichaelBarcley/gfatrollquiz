@@ -31,6 +31,11 @@ public class QuizQuestion {
   public QuizQuestion() {
   }
 
+  public QuizQuestion(String question, boolean isVerified) {
+    this.question = question;
+    this.isVerified = isVerified;
+  }
+
   public long getId() {
     return id;
   }

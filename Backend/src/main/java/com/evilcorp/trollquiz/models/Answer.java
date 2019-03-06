@@ -30,6 +30,11 @@ public class Answer {
   public Answer() {
   }
 
+  public Answer(String text, boolean isCorrect) {
+    this.text = text;
+    this.isCorrect = isCorrect;
+  }
+
   public long getId() {
     return id;
   }
