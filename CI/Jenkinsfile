@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    environment {
+        registry = "foxyfox/trollquiz"
+        registryCredential = 'docker-technical-foxyfox'
+        dockerImage = ''
+    }
+    stages {
+        stage('Build') {
+              when {
+                anyOf {
+                  branch 'master'
+                  branch 'dev'
+                  changeRequest target: 'master'
+                  changeRequest target: 'dev'
+                }
+              }
+              steps {
+                sh 'chmod +x gradlew'
+                sh './Backend/gradlew bootJar'
+              }
+            }
+            stage('Test') {
+              when {
+                anyOf {
+                  branch 'master'
+                  branch 'dev'
+                  changeRequest target: 'master'
+                  changeRequest target: 'dev'
+                }
+              }
+              steps {
+                sh './Backend/gradlew test'
+                sh 'cd ./Frontend'
+                sh 'npm install'
+                sh 'ng test --single-run true'
+              }
+            }
+    }
+}
