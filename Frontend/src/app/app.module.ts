@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MzButtonModule, MzInputModule } from 'ngx-materialize';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { NewQuestionComponent } from './components/new-question/new-question.com
 import { AdminComponent } from './components/admin/admin.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { GameService } from './services/game.service';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,10 @@ import { FooterComponent } from './layout/footer/footer.component';
     BrowserAnimationsModule,
     MzButtonModule,
     MzInputModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
