@@ -15,7 +15,3 @@ The evil developers of the project:
 ## [Project Outline](https://github.com/green-fox-academy/gfa-trollquiz/blob/master/evil_c%C3%B8rp.md)
 
 ## [GF 'Script Quiz App](https://github.com/green-fox-academy/teaching-materials/tree/master/project/quiz-app)
-
-## Project Dev TimeChart:
-
-# ![timechart](dev_time_chart.jpg)
