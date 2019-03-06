@@ -17,7 +17,8 @@ pipeline {
               }
               steps {
                 sh 'chmod +x ./Backend/gradlew'
-                sh 'cd Backend'
+                sh 'cd ./Backend'
+                sh 'ls'
                 sh './gradlew bootJar'
                 sh 'cd ..'
               }
@@ -32,7 +33,7 @@ pipeline {
                 }
               }
               steps {
-                sh 'cd Backend'
+                sh 'cd ./Backend'
                 sh './gradlew test'
                 sh 'cd ../Frontend'
                 sh 'npm install'
