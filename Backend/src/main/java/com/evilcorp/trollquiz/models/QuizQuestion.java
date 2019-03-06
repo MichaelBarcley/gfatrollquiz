@@ -22,6 +22,7 @@ public class QuizQuestion {
   private List<Answer> answers;
 
   @ManyToOne(cascade = CascadeType.MERGE)
+  @JsonIgnore
   private UserModel userModel;
 
   @Column(name = "verified")

@@ -1,5 +1,7 @@
 package com.evilcorp.trollquiz.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,9 +20,11 @@ public class Answer {
   private boolean isCorrect;
 
   @ManyToOne(cascade = CascadeType.MERGE)
+  @JsonIgnore
   private QuizQuestion quizQuestion;
 
   @ManyToOne(cascade = CascadeType.MERGE)
+  @JsonIgnore
   private UserModel userModel;
 
   public Answer() {
