@@ -17,8 +17,7 @@ pipeline {
               }
               steps {
                 sh 'chmod +x ./Backend/gradlew'
-                sh 'cd ./Backend'
-                sh 'ls'
+                sh 'cd ./Backend < ls'
                 sh './gradlew bootJar'
                 sh 'cd ..'
               }
