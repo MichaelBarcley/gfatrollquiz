@@ -9,6 +9,8 @@ import { LandingComponent } from './components/landing/landing.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { NewQuestionComponent } from './components/new-question/new-question.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AdminComponent } from './components/admin/admin.component';
     LandingComponent,
     LeaderboardComponent,
     NewQuestionComponent,
-    AdminComponent
+    AdminComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
