@@ -17,15 +17,18 @@ public class Answer {
   @Column(name = "correct")
   private boolean isCorrect;
 
-  @Column(name = "question_id")
   @ManyToOne(cascade = CascadeType.MERGE)
   private QuizQuestion quizQuestion;
 
-  @Column(name = "user_model_id")
   @ManyToOne(cascade = CascadeType.MERGE)
   private UserModel userModel;
 
   public Answer() {
+  }
+
+  public Answer(String text, boolean isCorrect) {
+    this.text = text;
+    this.isCorrect = isCorrect;
   }
 
   public long getId() {

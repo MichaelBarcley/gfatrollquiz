@@ -20,6 +20,9 @@ public class UserModel {
   @Column(name = "user_name")
   private String userName;
 
+  @Column(name = "email")
+  private String email;
+
   @Column(name = "password")
   private String password;
 
@@ -41,6 +44,16 @@ public class UserModel {
   private List<Answer> answers;
 
   public UserModel() {
+  }
+
+  public UserModel(String role, String userName, String email, String password, String clientToken, int points, int coins) {
+    this.role = role;
+    this.userName = userName;
+    this.email = email;
+    this.password = password;
+    this.clientToken = clientToken;
+    this.points = points;
+    this.coins = coins;
   }
 
   public long getId() {

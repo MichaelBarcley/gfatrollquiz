@@ -21,7 +21,6 @@ public class QuizQuestion {
   @JsonIgnore
   private List<Answer> answers;
 
-  @Column(name = "user_id")
   @ManyToOne(cascade = CascadeType.MERGE)
   private UserModel userModel;
 
@@ -29,6 +28,11 @@ public class QuizQuestion {
   private boolean isVerified;
 
   public QuizQuestion() {
+  }
+
+  public QuizQuestion(String question, boolean isVerified) {
+    this.question = question;
+    this.isVerified = isVerified;
   }
 
   public long getId() {
