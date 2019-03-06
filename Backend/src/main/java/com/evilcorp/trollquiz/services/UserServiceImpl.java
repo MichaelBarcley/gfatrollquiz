@@ -1,4 +1,4 @@
-package com.evilcorp.trollquiz.servicies;
+package com.evilcorp.trollquiz.services;
 
 import org.springframework.stereotype.Service;
 
