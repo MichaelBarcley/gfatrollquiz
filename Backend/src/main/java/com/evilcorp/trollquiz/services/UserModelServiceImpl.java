@@ -43,7 +43,8 @@ public class UserModelServiceImpl implements UserModelService {
 
   @Override
   public boolean deleteQuestion(long id) {
-    return false;
+    quizQuestionRepository.deleteById(id);
+    return true;
   }
 
   @Override
