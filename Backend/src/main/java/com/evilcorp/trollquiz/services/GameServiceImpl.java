@@ -17,77 +17,78 @@ import java.util.Random;
 
 @Service
 public class GameServiceImpl implements GameService {
-    private QuizQuestionRepository quizQuestionRepository;
-    private UserModelRepository userModelRepository;
-    private AnswerRepository answerRepository;
 
-    @Autowired
-    public GameServiceImpl(QuizQuestionRepository quizQuestionRepository, UserModelRepository userModelRepository, AnswerRepository answerRepository) {
-        this.quizQuestionRepository = quizQuestionRepository;
-        this.userModelRepository = userModelRepository;
-        this.answerRepository = answerRepository;
+  private QuizQuestionRepository quizQuestionRepository;
+  private UserModelRepository userModelRepository;
+  private AnswerRepository answerRepository;
+
+  @Autowired
+  public GameServiceImpl(QuizQuestionRepository quizQuestionRepository, UserModelRepository userModelRepository, AnswerRepository answerRepository) {
+    this.quizQuestionRepository = quizQuestionRepository;
+    this.userModelRepository = userModelRepository;
+    this.answerRepository = answerRepository;
+  }
+
+  public QuizQuestionDto getGameQuestion() {
+    QuizQuestion quizQuestion = quizQuestionRepository.getOne((long) new Random().nextInt(quizQuestionRepository.findAll().size()));
+    return mapQuizQuestionToDto(quizQuestion);
+  }
+
+  @Override
+  public boolean GetAnswer(long userId, long id, String answer) {
+    QuizQuestion quizQuestion = quizQuestionRepository.findById(id).get();
+    if (answer.equalsIgnoreCase(quizQuestion.getAnswers().stream().filter(Answer::isCorrect).findAny().get().getText())) {
+      UserModel user = userModelRepository.findById(userId).get();
+      user.setPoints(user.getPoints() + 1);
+      user.setCoins(user.getCoins() + 1);
+      return true;
+    } else {
+      Answer chosenAnswer = answerRepository.findAll().stream().filter(answer1 -> answer1.getText().equalsIgnoreCase(answer)).findFirst().get();
+      UserModel user = chosenAnswer.getUserModel();
+      user.setPoints(user.getPoints() + 1);
+      user.setCoins(user.getCoins() + 1);
+      return false;
     }
+  }
 
-    public QuizQuestionDto getGameQuestion() {
-        QuizQuestion quizQuestion = quizQuestionRepository.getOne((long) new Random().nextInt(quizQuestionRepository.findAll().size()));
-        return mapQuizQuestionToDto(quizQuestion);
+  @Override
+  public List<ScoreDto> GetLeaderBoard() {
+    List<ScoreDto> leaderBoard = new ArrayList<>();
+    List<UserModel> users = userModelRepository.findAll();
+    for (UserModel user : users) {
+      leaderBoard.add(mapUserToScore(user));
     }
+    return leaderBoard;
+  }
 
-    @Override
-    public boolean GetAnswer(long userId, long id, String answer) {
-        QuizQuestion quizQuestion = quizQuestionRepository.findById(id).get();
-        if(answer.equalsIgnoreCase(quizQuestion.getAnswers().stream().filter(Answer::isCorrect).findAny().get().getText())) {
-            UserModel user = userModelRepository.findById(userId).get();
-            user.setPoints(user.getPoints() + 1);
-            user.setCoins(user.getCoins() + 1);
-            return true;
-        } else {
-            Answer chosenAnswer = answerRepository.findAll().stream().filter(answer1 -> answer1.getText().equalsIgnoreCase(answer)).findFirst().get();
-            UserModel user = chosenAnswer.getUserModel();
-            user.setPoints(user.getPoints() + 1);
-            user.setCoins(user.getCoins() + 1);
-            return false;
+  private QuizQuestionDto mapQuizQuestionToDto(QuizQuestion quizQuestion) {
+    QuizQuestionDto responseQuestionDto = new QuizQuestionDto();
+    responseQuestionDto.id = quizQuestion.getId();
+    responseQuestionDto.question = quizQuestion.getQuestion();
+    responseQuestionDto.answers = new ArrayList<>();
+    int correctResponse = new Random().nextInt(3);
+    for (int i = 0; i < 4; i++) {
+      if (i == correctResponse) {
+        responseQuestionDto.answers.add(quizQuestion.getAnswers().stream().filter(Answer::isCorrect).findFirst().get().getText());
+      } else {
+        boolean isUnchecked = true;
+        int answerId = new Random().nextInt(quizQuestion.getAnswers().size() - 1);
+        while (isUnchecked) {
+          if (!responseQuestionDto.answers.contains(quizQuestion.getAnswers().get(answerId).getText())) {
+            responseQuestionDto.answers.add(quizQuestion.getAnswers().get(answerId).getText());
+            isUnchecked = false;
+          }
         }
+      }
     }
+    return responseQuestionDto;
+  }
 
-    @Override
-    public List<ScoreDto> GetLeaderBoard() {
-        List<ScoreDto> leaderBoard = new ArrayList<>();
-        List<UserModel> users = userModelRepository.findAll();
-        for (UserModel user : users) {
-            leaderBoard.add(mapUserToScore(user));
-        }
-        return leaderBoard;
-    }
-
-    private QuizQuestionDto mapQuizQuestionToDto(QuizQuestion quizQuestion) {
-        QuizQuestionDto responseQuestionDto = new QuizQuestionDto();
-        responseQuestionDto.id = quizQuestion.getId();
-        responseQuestionDto.question = quizQuestion.getQuestion();
-        responseQuestionDto.answers = new ArrayList<>();
-        int correctResponse = new Random().nextInt(3);
-        for(int i = 0; i < 4; i++) {
-            if(i == correctResponse) {
-                responseQuestionDto.answers.add(quizQuestion.getAnswers().stream().filter(Answer::isCorrect).findFirst().get().getText());
-            } else {
-                boolean isUnchecked = true;
-                int answerId = new Random().nextInt(quizQuestion.getAnswers().size() -1);
-                while (isUnchecked) {
-                    if(!responseQuestionDto.answers.contains(quizQuestion.getAnswers().get(answerId).getText())) {
-                        responseQuestionDto.answers.add(quizQuestion.getAnswers().get(answerId).getText());
-                        isUnchecked = false;
-                    }
-                }
-            }
-        }
-        return responseQuestionDto;
-    }
-
-    private ScoreDto mapUserToScore(UserModel userModel) {
-        ScoreDto scoreDto = new ScoreDto();
-        scoreDto.setScore(userModel.getPoints());
-        scoreDto.setUserId(userModel.getId());
-        scoreDto.setUsername(userModel.getUserName());
-        return scoreDto;
-    }
+  private ScoreDto mapUserToScore(UserModel userModel) {
+    ScoreDto scoreDto = new ScoreDto();
+    scoreDto.setScore(userModel.getPoints());
+    scoreDto.setUserId(userModel.getId());
+    scoreDto.setUsername(userModel.getUserName());
+    return scoreDto;
+  }
 }

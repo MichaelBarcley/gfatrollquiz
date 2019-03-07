@@ -4,9 +4,9 @@ import com.evilcorp.trollquiz.models.Answer;
 import com.evilcorp.trollquiz.models.QuizQuestion;
 
 public interface UserModelService {
-    public boolean AddQuestion(QuizQuestion quizQuestion);
-    public boolean UpdateQuestion(QuizQuestion quizQuestion);
-    public boolean DeleteQuestion(long id);
-    public boolean AddAnswer(QuizQuestion quizQuestion, Answer answer);
-    public boolean DeleteAnswer(long id);
+    public boolean addQuestion(QuizQuestion quizQuestion);
+    public boolean updateQuestion(QuizQuestion quizQuestion);
+    public boolean deleteQuestion(long id);
+    public boolean addAnswer(Answer answer);
+    public boolean deleteAnswer(long id);
 }
