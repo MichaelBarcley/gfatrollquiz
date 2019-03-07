@@ -3,14 +3,16 @@ package com.evilcorp.trollquiz.services;
 import com.evilcorp.trollquiz.models.QuizQuestion;
 import com.evilcorp.trollquiz.repositories.QuizQuestionRepository;
 import com.evilcorp.trollquiz.services.dto.QuizQuestionDto;
+import com.evilcorp.trollquiz.services.dto.ScoreDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Service
-public class GameServiceImpl {
+public class GameServiceImpl implements GameService {
     private QuizQuestionRepository quizQuestionRepository;
 
     @Autowired
@@ -21,6 +23,16 @@ public class GameServiceImpl {
     public QuizQuestionDto getGameQuestion() {
         QuizQuestion quizQuestion = quizQuestionRepository.getOne((long) new Random().nextInt(quizQuestionRepository.findAll().size()));
         return mapQuizQuestionToDto(quizQuestion);
+    }
+
+    @Override
+    public boolean GetAnswer(long id, String answer) {
+        return false;
+    }
+
+    @Override
+    public List<ScoreDto> GetLeaderboard() {
+        return null;
     }
 
     private QuizQuestionDto mapQuizQuestionToDto(QuizQuestion quizQuestion) {
