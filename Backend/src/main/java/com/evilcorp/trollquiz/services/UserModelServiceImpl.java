@@ -25,13 +25,13 @@ public class UserModelServiceImpl implements UserModelService {
   }
 
   @Override
-  public boolean AddQuestion(QuizQuestion quizQuestion) {
+  public boolean addQuestion(QuizQuestion quizQuestion) {
     quizQuestionRepository.save(quizQuestion);
     return true;
   }
 
   @Override
-  public boolean UpdateQuestion(QuizQuestion quizQuestion) {
+  public boolean updateQuestion(QuizQuestion quizQuestion) {
     QuizQuestion quizqestionToBeChange = quizQuestionRepository.findById(quizQuestion.getId()).orElse(null);
     quizqestionToBeChange.setAnswers(quizQuestion.getAnswers());
     quizqestionToBeChange.setQuestion(quizQuestion.getQuestion());
@@ -42,17 +42,17 @@ public class UserModelServiceImpl implements UserModelService {
   }
 
   @Override
-  public boolean DeleteQuestion(long id) {
+  public boolean deleteQuestion(long id) {
     return false;
   }
 
   @Override
-  public boolean AddAnswer(QuizQuestion quizQuestion, Answer answer) {
+  public boolean addAnswer(QuizQuestion quizQuestion, Answer answer) {
     return false;
   }
 
   @Override
-  public boolean DeleteAnswer(long id) {
+  public boolean deleteAnswer(long id) {
     return false;
   }
 }
