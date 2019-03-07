@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface GameService {
     public QuizQuestionDto getGameQuestion();
-    public boolean GetAnswer(long id, String answer);
-    public List<ScoreDto> GetLeaderboard();
+    public boolean GetAnswer(long userId, long id, String answer);
+    public List<ScoreDto> GetLeaderBoard();
 }
