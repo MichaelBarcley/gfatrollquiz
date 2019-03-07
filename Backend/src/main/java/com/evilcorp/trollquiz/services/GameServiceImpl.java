@@ -51,8 +51,13 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<ScoreDto> GetLeaderboard() {
-        return null;
+    public List<ScoreDto> GetLeaderBoard() {
+        List<ScoreDto> leaderBoard = new ArrayList<>();
+        List<UserModel> users = userModelRepository.findAll();
+        for (UserModel user : users) {
+            leaderBoard.add(mapUserToScore(user));
+        }
+        return leaderBoard;
     }
 
     private QuizQuestionDto mapQuizQuestionToDto(QuizQuestion quizQuestion) {
@@ -76,5 +81,13 @@ public class GameServiceImpl implements GameService {
             }
         }
         return responseQuestionDto;
+    }
+
+    private ScoreDto mapUserToScore(UserModel userModel) {
+        ScoreDto scoreDto = new ScoreDto();
+        scoreDto.setScore(userModel.getPoints());
+        scoreDto.setUserId(userModel.getId());
+        scoreDto.setUsername(userModel.getUserName());
+        return scoreDto;
     }
 }
