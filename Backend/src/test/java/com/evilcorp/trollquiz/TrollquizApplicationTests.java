@@ -17,14 +17,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @ActiveProfiles("test")
 public class TrollquizApplicationTests {
 
-<<<<<<< HEAD
+
 //  @Test
 //  public void contextLoads() {
 //  }
-=======
-  @Test
-  public void contextLoads() throws Exception{
-  }
->>>>>>> e6d8c77b40189d618fc4c2fabcb2ff7848ba4390
+
 
 }
