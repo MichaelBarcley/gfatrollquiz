@@ -8,6 +8,8 @@ import com.evilcorp.trollquiz.repositories.UserModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserModelServiceImpl implements UserModelService {
 
@@ -48,12 +50,14 @@ public class UserModelServiceImpl implements UserModelService {
   }
 
   @Override
-  public boolean addAnswer(QuizQuestion quizQuestion, Answer answer) {
-    return false;
+  public boolean addAnswer(Answer answer) {
+    answerRepository.save(answer);
+    return true;
   }
 
   @Override
   public boolean deleteAnswer(long id) {
-    return false;
+    answerRepository.deleteById(id);
+    return true;
   }
 }
