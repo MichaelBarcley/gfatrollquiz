@@ -1,2 +1,4 @@
-export class Answer {
+export interface Answer {
+    option: string;
+    isCorrect: boolean;
 }
