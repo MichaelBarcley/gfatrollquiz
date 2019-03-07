@@ -20,4 +20,5 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.198'
 }
