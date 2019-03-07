@@ -6,6 +6,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { NewQuestionComponent } from './components/new-question/new-question.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'leaderboard', component: LeaderboardComponent},
   { path: 'newquestion', component: NewQuestionComponent},
   { path: 'admin', component: AdminComponent},
+  { path: 'register', component: RegisterComponent},
   { path: '**', component: NotFoundComponent}
 ];
 

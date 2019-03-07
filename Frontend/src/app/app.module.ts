@@ -15,6 +15,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { GameService } from './services/game.service';
+import { RegisterComponent } from './components/register/register.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { GameService } from './services/game.service';
     NewQuestionComponent,
     AdminComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { GameService } from './services/game.service';
     MzButtonModule,
     MzInputModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [GameService],
   bootstrap: [AppComponent]

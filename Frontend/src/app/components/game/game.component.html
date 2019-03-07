@@ -1,3 +1,15 @@
-<p>
-  game works!
-</p>
+<div class="row">
+  <div class="col s8 offset-s2">
+    <div class="card green darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">{{ currentQuestion.question }}</span>
+      </div>
+      <div class="card-action" *ngFor="let answer of currentQuestion.answers">
+        <a (click)="onClick(answer)">{{ answer.option }}</a>
+      </div>
+      <div *ngIf="userAnswer != null">
+          <button (click)="getNextQuestion()">Next question, please!</button>
+      </div>
+    </div>
+  </div>
+</div>
